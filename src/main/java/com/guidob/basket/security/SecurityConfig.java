@@ -65,6 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().sameOrigin() //To enable H2 Database
                 .and()
                 .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/teams/listTeams").permitAll() //esto para pag.principal,dejar.                
                 .antMatchers(HttpMethod.GET, "/matches/listMatches").permitAll() //esto para pag.principal,dejar.
                 .antMatchers(HttpMethod.GET, "/players/listPlayers").permitAll() //esto para pag.principal,dejar.
                 .antMatchers(HttpMethod.GET, "/players/**") //agrego para que pasen los get gbc/sacar

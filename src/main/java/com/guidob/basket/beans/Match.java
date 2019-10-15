@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -17,26 +19,35 @@ public class Match {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
-	String result;
+
 	//@JsonFormat(pattern="dd-MM-yyyy")
 	@JsonFormat(pattern="yyyy-MM-dd")
     Date date;
-   // String value;
-   // String registrationNumber;    
+    @ManyToOne
+    @JoinColumn(name = "idTeamLocal")
+	Team teamLocal;
+    
+    @ManyToOne
+    @JoinColumn(name = "idTeamAway")
+	Team teamAway;
+	String resultLocal;
+	String resultAway;	 
     
     public Match(){}
     
-    public Match(long id, String result) {
+    public Match(long id, String resultLocal, String resultAway) {
         this.id = id;
-        this.result = result;
+        this.resultLocal = resultLocal;
+        this.resultAway = resultAway;
     }    
     
-    public Match(long id, String result, Date date) {
+    public Match(long id, Date date, String resultLocal, String resultAway, Team teamLocal, Team teamAway) {
         this.id = id;
-        this.result = result;
+        this.resultLocal = resultLocal;
+        this.resultAway = resultAway;   
+        this.teamLocal = teamLocal;
+        this.teamAway = teamAway;
         this.date = date;
-      //  this.value = value;
-       // this.registrationNumber = registrationNumber;
     }        
     
 	public long getId() {
@@ -47,12 +58,36 @@ public class Match {
 		this.id = id;
 	}
 	
-	public String getResult() {
-		return result;
+	public String getResultLocal() {
+		return resultLocal;
 	}
 	
-	public void setResult(String result) {
-		this.result = result;
+	public Team getTeamLocal() {
+		return teamLocal;
+	}
+
+	public void setTeamLocal(Team teamLocal) {
+		this.teamLocal = teamLocal;
+	}
+
+	public Team getTeamAway() {
+		return teamAway;
+	}
+
+	public void setTeamAway(Team teamAway) {
+		this.teamAway = teamAway;
+	}
+
+	public String getResultAway() {
+		return resultAway;
+	}
+
+	public void setResultAway(String resultAway) {
+		this.resultAway = resultAway;
+	}
+
+	public void setResultLocal(String resultLocal) {
+		this.resultLocal = resultLocal;
 	}
 	
 	public Date getDate() {
