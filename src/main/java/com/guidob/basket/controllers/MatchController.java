@@ -69,12 +69,13 @@ public class MatchController {
 	public @ResponseBody List<Match> listAllMatches() { 
 	    return serviceMatch.findAllMatches();
 	}	
-	
+	/*
 	//metodo publico.
 	@RequestMapping(value = "/matches/listMatches", method = RequestMethod.GET)
-	public @ResponseBody List<Match> listMatches() { 
+	public @ResponseBody List<Match> listMatches() {
+		System.out.print("recupero equipos");
 	    return serviceMatch.findAllMatches();
-	}		
+	}*/		
 	
 	@RequestMapping(value = "/matches/{id}", method = RequestMethod.PUT)
 	public String updateMatch(@PathVariable Long id, @RequestBody Match match){

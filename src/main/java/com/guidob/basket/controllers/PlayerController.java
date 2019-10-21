@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -131,11 +132,27 @@ public class PlayerController {
 	public @ResponseBody List<Player> listAllUsers() { 
 	    return servicePlayer.findAllUsers();
 	}	
-	
+	/*
 	@RequestMapping(value = "/players/{id}", method = RequestMethod.PUT)
 	public String updatePlayer(@PathVariable Long id, @RequestBody Player player){
 	   // return servicePlayer.update(id, player);
 		 servicePlayer.save(player);
+		 //return player;
+		return "OK";
+	 }	
+	 */
+	@RequestMapping(value = "/players/{id}", method = RequestMethod.PUT)
+	public String updatePlayer(@RequestParam("defaultImg") MultipartFile defaultImg, @PathVariable Long id, @RequestParam("name") 
+	String name , @RequestParam("position")String position,@RequestParam("email") String email
+	,@RequestParam("dayBirth") String dayBirth) throws IOException{
+		Player onePlayer = this.obtenerPlayer(id);
+		onePlayer.setName(name);
+	//	onePlayer.setDayBirth(dayBirth);
+		onePlayer.setPosition(position);
+		//guardar file como en add
+		onePlayer.setDefaultImg(defaultImg.getOriginalFilename());
+	    servicePlayer.save(onePlayer);
+		// servicePlayer.save(player);
 		 //return player;
 		return "OK";
 	 }	
