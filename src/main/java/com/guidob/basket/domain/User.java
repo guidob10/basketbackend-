@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.Date;
 
 @Entity
+@Table(name="users")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
