@@ -21,7 +21,8 @@ import com.guidob.basket.services.MatchService;
 import com.guidob.basket.services.PlayerService;
 
 
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class MatchController {
 

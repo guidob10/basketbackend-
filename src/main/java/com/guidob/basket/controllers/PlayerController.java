@@ -28,7 +28,8 @@ import com.guidob.basket.repository.PlayerRepository;
 import com.guidob.basket.services.PlayerService;
 
 
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class PlayerController {
 
@@ -96,7 +97,7 @@ public class PlayerController {
 		  servicePlayer.save(nPlayer);
 		  
     	  byte[] bytes;
-
+//mejor crear una clase private StorageService storageService;
           if (!defaultImg.isEmpty()) {
                bytes = defaultImg.getBytes();
               //store file in storage
@@ -107,18 +108,26 @@ public class PlayerController {
       	  return "Savedd";
     } 
 	
+    
     private void saveUploadedFiles(List<MultipartFile> files) throws IOException {
 
-        for (MultipartFile file : files) {
-
-            if (file.isEmpty()) {
-                continue; //next pls
-            }
-
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
-            Files.write(path, bytes);
-
+    	try {
+	        for (MultipartFile file : files) {
+	
+	            if (file.isEmpty()) {
+	                continue; //next pls
+	            }
+	
+	            byte[] bytes = file.getBytes();
+	            Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+	            /*
+	             *            Files.copy(is, Paths.get(path + fileName),
+	                    StandardCopyOption.REPLACE_EXISTING);
+	             */
+	            Files.write(path, bytes);
+	        }
+	    }  catch (IOException e) {
+	         e.printStackTrace();          
         }
 
     }

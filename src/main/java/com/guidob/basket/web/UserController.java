@@ -27,7 +27,8 @@ import javax.validation.Valid;
 import static  com.guidob.basket.security.SecurityConstants.TOKEN_PREFIX;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/users")
 public class UserController {
 

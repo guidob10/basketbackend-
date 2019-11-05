@@ -23,7 +23,8 @@ import com.guidob.basket.services.PlayerService;
 import com.guidob.basket.services.TeamService;
 
 
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+//@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 public class TeamController {
 

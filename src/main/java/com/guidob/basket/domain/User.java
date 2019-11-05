@@ -22,13 +22,13 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String username;
     @NotBlank(message = "Please enter your full name")
-    private String fullName;
+    private String fullname;
     @NotBlank(message = "Password field is required")
     private String password;
     @Transient
     private String confirmPassword;
-    private Date create_At;
-    private Date update_At;
+    private Date create_at;
+    private Date update_at;
 
     //OneToMany with Project
 
@@ -51,12 +51,12 @@ public class User implements UserDetails {
         this.username = username;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
 
     public String getPassword() {
@@ -76,29 +76,29 @@ public class User implements UserDetails {
     }
 
     public Date getCreate_At() {
-        return create_At;
+        return create_at;
     }
 
-    public void setCreate_At(Date create_At) {
-        this.create_At = create_At;
+    public void setCreate_At(Date create_at) {
+        this.create_at = create_at;
     }
 
     public Date getUpdate_At() {
-        return update_At;
+        return update_at;
     }
 
-    public void setUpdate_At(Date update_At) {
-        this.update_At = update_At;
+    public void setUpdate_At(Date update_at) {
+        this.update_at = update_at;
     }
 
     @PrePersist
     protected void onCreate(){
-        this.create_At = new Date();
+        this.create_at = new Date();
     }
 
     @PreUpdate
     protected void onUpdate(){
-        this.update_At = new Date();
+        this.update_at = new Date();
     }
 
     /*
