@@ -83,13 +83,13 @@ public class PlayerController {
     
     @PostMapping("/players")
     public String newPlayer(@RequestParam("defaultImg") MultipartFile defaultImg, @RequestParam("name") 
-		String name , @RequestParam("position")String position,@RequestParam("email") String email
+		String name , @RequestParam("position")String position,@RequestParam("registrationNumber") String registrationNumber
 		,@RequestParam("dayBirth") String dayBirth) throws IOException  {
     	
 		// // ver q no llega como date.
     	Player nPlayer = new Player(0, "");
 		  nPlayer.setName(name);
-		//  nPlayer.setEmail(email);		  
+		  nPlayer.setRegistrationNumber(registrationNumber);		  
 		  nPlayer.setPosition(position);
 		 // nPlayer.setDayBirth(dayBirth); transformar string a date, viene yyyy-mm-dd
 		  nPlayer.setDayBirth(new Date());
@@ -104,7 +104,7 @@ public class PlayerController {
                saveUploadedFiles(Arrays.asList(defaultImg));
           }
 
-          System.out.println(String.format("receive %s from %s", defaultImg.getOriginalFilename(), email));
+          System.out.println(String.format("receive %s from %s", defaultImg.getOriginalFilename(), name));
       	  return "Savedd";
     } 
 	
@@ -152,12 +152,13 @@ public class PlayerController {
 	 */
 	@RequestMapping(value = "/players/{id}", method = RequestMethod.PUT)
 	public String updatePlayer(@RequestParam("defaultImg") MultipartFile defaultImg, @PathVariable Long id, @RequestParam("name") 
-	String name , @RequestParam("position")String position,@RequestParam("email") String email
+	String name , @RequestParam("position")String position,@RequestParam("registrationNumber") String registrationNumber
 	,@RequestParam("dayBirth") String dayBirth) throws IOException{
 		Player onePlayer = this.obtenerPlayer(id);
 		onePlayer.setName(name);
 	//	onePlayer.setDayBirth(dayBirth);
 		onePlayer.setPosition(position);
+		onePlayer.setRegistrationNumber(registrationNumber);		
 		//guardar file como en add
 		onePlayer.setDefaultImg(defaultImg.getOriginalFilename());
 	    servicePlayer.save(onePlayer);

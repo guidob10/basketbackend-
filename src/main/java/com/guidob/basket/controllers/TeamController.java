@@ -63,8 +63,8 @@ public class TeamController {
     }
     */
     @PostMapping("/teams")
-    String newTeam(@RequestBody Team newMatch) {
-    	serviceTeam.save(newMatch);
+    String newTeam(@RequestBody Team newTeam) {
+    	serviceTeam.save(newTeam);
     	return "Savedd";
     }    
 	
