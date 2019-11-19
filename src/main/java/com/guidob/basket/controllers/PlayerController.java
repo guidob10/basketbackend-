@@ -49,38 +49,6 @@ public class PlayerController {
                             String.format(template, name));
     }
     
-	// @ResponseBody means the returned String is the response, not a view name
-	// @RequestParam means it is a parameter from the GET or POST request    
-    // este funciona ok, pero solo con el postman
-    /*
-    @PostMapping(path="/players") // 
-	public @ResponseBody String addNewPlayer (@RequestParam String name
-			, @RequestParam String email) {
-		Player n = new Player(0, "");
-		n.setName(name);
-		n.setValue("");
-		servicePlayer.save(n);
-		return "Saved";
-	} */  
-
-    /* recibe data ok pero no graba
-    @PostMapping("/players")
-    Player newEmployee(@RequestBody Player newEmployee) {
-      return playerRepository.save(newEmployee);
-    }
-    */
-    
-    /*este OK
-    @PostMapping("/players")
-    String newPlayer(@RequestBody Player newPlayer) {
-    	servicePlayer.save(newPlayer);
-    	return "Savedd";
-    }    */
-    
-//
-   // @ResponseStatus(HttpStatus.OK)
-//    @RequestMapping(value = "/players") 
-    
     @PostMapping("/players")
     public String newPlayer(@RequestParam("defaultImg") MultipartFile defaultImg, @RequestParam("name") 
 		String name , @RequestParam("position")String position,@RequestParam("registrationNumber") String registrationNumber
@@ -141,7 +109,7 @@ public class PlayerController {
 	public @ResponseBody List<Player> listAllUsers() { 
 	    return servicePlayer.findAllUsers();
 	}	
-	/*
+	
 	@RequestMapping(value = "/players/{id}", method = RequestMethod.PUT)
 	public String updatePlayer(@PathVariable Long id, @RequestBody Player player){
 	   // return servicePlayer.update(id, player);
@@ -149,7 +117,8 @@ public class PlayerController {
 		 //return player;
 		return "OK";
 	 }	
-	 */
+	
+	/*
 	@RequestMapping(value = "/players/{id}", method = RequestMethod.PUT)
 	public String updatePlayer(@RequestParam("defaultImg") MultipartFile defaultImg, @PathVariable Long id, @RequestParam("name") 
 	String name , @RequestParam("position")String position,@RequestParam("registrationNumber") String registrationNumber
@@ -166,6 +135,7 @@ public class PlayerController {
 		 //return player;
 		return "OK";
 	 }	
+	 */
 	
 	@RequestMapping(value = "/players/{id}", method = RequestMethod.GET)
 	public @ResponseBody Player obtenerPlayer(@PathVariable Long id){
@@ -173,7 +143,8 @@ public class PlayerController {
 		Player player =  servicePlayer.find(id);
 		return player;
  
-	 }		
+	 }	
+	 	
 	 
 	 @RequestMapping(value = "/players/{id}", method = RequestMethod.DELETE)
 	 public  @ResponseBody  void deleteEmployee(@PathVariable Long id) {
