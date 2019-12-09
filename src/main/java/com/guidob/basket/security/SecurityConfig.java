@@ -67,6 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.GET, "/teams/listTeams").permitAll() //esto para pag.principal,dejar.                
                 .antMatchers(HttpMethod.GET, "/matches/**").permitAll() //esto para pag.principal,dejar. ver..
+                .antMatchers(HttpMethod.GET, "/projects/**").permitAll() //esto para pag.principal,dejar. ver..                
                 .antMatchers(HttpMethod.GET, "/players/listPlayers").permitAll() //esto para pag.principal,dejar.
                 .antMatchers(HttpMethod.GET, "/players/**") //agrego para que pasen los get gbc/sacar
                 .permitAll()

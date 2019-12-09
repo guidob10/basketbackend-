@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -147,8 +149,11 @@ public class PlayerController {
 	 	
 	 
 	 @RequestMapping(value = "/players/{id}", method = RequestMethod.DELETE)
-	 public  @ResponseBody  void deleteEmployee(@PathVariable Long id) {
+	 public  @ResponseBody  ResponseEntity<String>  deleteEmployee(@PathVariable Long id) {
 		  servicePlayer.deleteById(id);
+		  return ResponseEntity
+				       .status(HttpStatus.NO_CONTENT)
+				       .body("");		  
 	  }
 	  
 }
