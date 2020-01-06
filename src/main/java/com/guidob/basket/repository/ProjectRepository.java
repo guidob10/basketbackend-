@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.CrudRepository;
+//import org.springframework.data.domain.Page;
+//import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.guidob.basket.beans.Player;
 import com.guidob.basket.beans.Project;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
@@ -29,6 +29,10 @@ public interface ProjectRepository extends PagingAndSortingRepository<Project, I
 	@Transactional
 	void deleteById(Long id);
 	
- //   List<Project> findAllByPrice(double price, Pageable pageable);
+
+//	Page<Project> findByProjectNamePage(String projectName, Pageable pageable);	
+	//fallaba por el nombre...
+ //   List<Project> findByDescriptionPage(String description, Pageable pageable);
+    Page<Project> findAllByDescription(String description, Pageable pageable);
 	
 }

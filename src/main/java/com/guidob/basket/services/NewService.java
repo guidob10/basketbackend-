@@ -7,45 +7,47 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.guidob.basket.beans.Match;
+import com.guidob.basket.beans.New;
 import com.guidob.basket.beans.Player;
-import com.guidob.basket.beans.Project;
-import com.guidob.basket.repository.MatchRepository;
+import com.guidob.basket.beans.Team;
+import com.guidob.basket.repository.NewRepository;
 import com.guidob.basket.repository.PlayerRepository;
+import com.guidob.basket.repository.TeamRepository;
 
 // Registramos esta clase como un Bean en nuestro Root ApplicationContext.
 
 @Service
-public class MatchService {
+public class NewService {
 
 	// Inyectamos una instancia desde nuestro Root ApplicationContext.
     @Autowired
-    private MatchRepository matchRepository;
+    private NewRepository newRepository;
 
-	public List<Match> findAllMatches() {
+	public List<New> findAllNews() {
 		// TODO Auto-generated method stub
-		return (List<Match>) matchRepository.findAll();
+		return (List<New>) newRepository.findAll();
 	}	
 	
-	public Match find(Long id) {
+	public Page<New> findAllNewsPage(Pageable pageable) {		 
+		Page<New> allNews = newRepository.findAll(pageable);
+	
+		return allNews;
+	}		
+	
+	public New find(Long id) {
 		// TODO Auto-generated method stub
 	//	return (Optional<Player>)playerRepository.findById(id);
 	//	return (Player)playerRepository.findById(id).get();	
-		return (Match)matchRepository.findById(id);
+		return (New)newRepository.findById(id);
 	}		
 	
-	public Page<Match> findAllMatchesPage(Pageable pageable) {		 
-		Page<Match> allProducts = matchRepository.findAll(pageable);
-	
-		return allProducts;
-	}	
-	  	
-	public void save(Match n) {
+	public void save(New n) {
 		// TODO Auto-generated method stub
-		 matchRepository.save(n);
+		newRepository.save(n);
 	}	
 	
 	public void deleteById(Long id) {
-		matchRepository.deleteById(id);
+		newRepository.deleteById(id);
 	}
 
 }

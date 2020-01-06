@@ -69,7 +69,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/matches/**").permitAll() //esto para pag.principal,dejar. ver..
                 .antMatchers(HttpMethod.GET, "/projects/**").permitAll() //esto para pag.principal,dejar. ver..                
                 .antMatchers(HttpMethod.GET, "/players/listPlayers").permitAll() //esto para pag.principal,dejar.
-                .antMatchers(HttpMethod.GET, "/players/**") //agrego para que pasen los get gbc/sacar
+                .antMatchers(HttpMethod.GET, "/players/**").permitAll() //agrego para que pasen los get gbc/sacar
+                .antMatchers(HttpMethod.GET, "/news/**") //agrego para que pasen los get gbc/sacar                
                 .permitAll()
                 .antMatchers(HttpMethod.POST, "/players/**").permitAll() //esto sacar creo
                 .antMatchers(HttpMethod.DELETE, "/players/**").permitAll()    

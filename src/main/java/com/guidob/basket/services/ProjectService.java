@@ -3,14 +3,10 @@ package com.guidob.basket.services;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.guidob.basket.beans.Player;
 import com.guidob.basket.beans.Project;
-import com.guidob.basket.repository.PlayerRepository;
 import com.guidob.basket.repository.ProjectRepository;
 
 // Registramos esta clase como un Bean en nuestro Root ApplicationContext.
@@ -34,6 +30,14 @@ public class ProjectService {
 	
 		return allProducts;
 	}	
+	 
+	public Page<Project> findAllProjectsPage(String description, Pageable pageable) {
+		 
+
+		Page<Project> allProducts = projectRepository.findAllByDescription(description, pageable);
+	
+		return allProducts;
+	} 
 	
 	public Project find(Long id) {
 		// TODO Auto-generated method stub

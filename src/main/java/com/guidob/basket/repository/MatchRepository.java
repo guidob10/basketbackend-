@@ -16,4 +16,5 @@ import com.guidob.basket.beans.Match;
 	void deleteById(Long id);
 	
 	Page<Match> findAll(Pageable pageable);
+
 }

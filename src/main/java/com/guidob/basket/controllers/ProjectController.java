@@ -1,11 +1,9 @@
 package com.guidob.basket.controllers;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,10 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.EntityLinks;
-import org.springframework.hateoas.PagedResources;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,12 +25,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import com.guidob.basket.beans.Player;
 import com.guidob.basket.beans.Project;
 import com.guidob.basket.exceptions.UserErrorException;
-import com.guidob.basket.services.PlayerService;
 import com.guidob.basket.services.ProjectService;
 
 
@@ -154,27 +146,41 @@ public class ProjectController {
 	     return resultPage.getContent();
 	 }*/	 
 	 
+	 
+	 // pagina y filtra
+//This is not an acceptable approach, but fortunately there is an existing solution to these problems.Using Specifications	 
+ 
 	 @RequestMapping("/projects")
-	 @GetMapping(params = { "page", "size","sort_by" }) 
-	 public ResponseEntity<?> getAllEmployees(
+	 //@GetMapping(params = { "page", "size","sort_by","description" }) 
+	 public ResponseEntity<?> getAllEmployees(             			 
                     @RequestParam(defaultValue = "0") int page, 
                     @RequestParam(defaultValue = "10") int size,
-                    @RequestParam(defaultValue = "id") String sort_by) 	{
+                    @RequestParam(defaultValue = "id") String sort_by,
+     				@RequestParam(defaultValue = "") String description) {
 		 
 	 
 		if (size > 10) {
 			size = 10;
-		}	
+		}
 		
 		Pageable firstPageWithTwoElements = PageRequest.of(page, size, Sort.by(sort_by).descending());		
-
-		Page<Project> resultPage = serviceProject.findAllProjectsPage(firstPageWithTwoElements);
+		Page<Project> resultPage = null;
+        if (description.equals("")) {
+    		resultPage = serviceProject.findAllProjectsPage(firstPageWithTwoElements);
+    	        	
+          //  return serviceProject.findAll(pageable);
+        } else {
+       //     return serviceProject.findByProjectName(projectName, pageable);       		
+       		resultPage = serviceProject.findAllProjectsPage(description, firstPageWithTwoElements);
+       		
+        }		
 		
+	
 	     if (page > resultPage.getTotalPages()) {
 	    	 throw new UserErrorException("Username '"+"Project Pagination "+"' error");
 	     }
 	     
 	    return ResponseEntity.ok(pagedAssembler.toResource(resultPage));
 
-	 } 
+	 }	 
 }
