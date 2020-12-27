@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.guidob.basket.beans.RequestMail;
 import com.guidob.basket.domain.User;
 import com.guidob.basket.exceptions.UserErrorException;
 import com.guidob.basket.repository.UserRepository;
@@ -14,7 +15,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
+    
+    @Autowired
+    private SmtpService smtpService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -28,6 +31,15 @@ public class UserService {
             // Make sure that password and confirmPassword match
             // We don't persist or show the confirmPassword
             newUser.setConfirmPassword("");
+            
+    		RequestMail requestMail = new RequestMail();
+    		requestMail.setFrom("guidobertinat@gmail.com");
+    		//Username is the email
+    		requestMail.setTo(newUser.getUsername());		
+    		requestMail.setBody("Te has registrado como usuario.");
+    		requestMail.setSubject("Registro de Usuario");
+
+    		smtpService.send(requestMail);             
             return userRepository.save(newUser);
 
         }catch (Exception e){
