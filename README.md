@@ -15,7 +15,7 @@ It uses differents services, that are listed below:
 - API Gateway/Lambda
 - CloudFormation
 - CloudWatch
-- CodeCommit, CodeBuild, CodeDeploy, CodePipeline
+- CodeCommit, CodeBuild, S3, CodeDeploy, CodePipeline
 - SES
 - ApacheBench (in linux)
 
