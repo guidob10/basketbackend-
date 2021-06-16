@@ -14,10 +14,11 @@ It uses differents services, that are listed below:
 - IAM Users/Roles/Policies
 - API Gateway/Lambda
 - CloudFormation
+- CloudWatch
 - CodeCommit, CodeBuild, CodeDeploy, CodePipeline
 - SES
 - ApacheBench (in linux)
 
 
 
-##### For more information about the process and configuration you can see the Documentation.docx file in the repository.
+##### For more information about the process and configuration you can see the Documentation.docx file in the repository, with all the details.
